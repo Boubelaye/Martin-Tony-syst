@@ -3,39 +3,51 @@
 #include <unistd.h>
 #include <signal.h>
 #include <time.h>
+#include <errno.h>
+#include <string.h>
 
-int scoreObtenu;
+int score = 0;
 
-int hasard(){
-  return rand() %10;
-}
-
-void sortie(){
-  printf("\nVous avez obtenu : %d\n", scoreObtenu);
+*void end_game (int sig){
+  printf("\n Score final : %d\n", score);
   exit(0);
 }
 
-int main(){
-  scoreObtenu=0;
-  struct sigaction action;
-  action.sa_handler = sortie;
-  action.sa_flags = 0;
-  sigemptyset(&action.sa_mask);
-  sigaction(SIGALRM, &action, NULL);
-  sigaction(SIGINT, &action, NULL);
-
-  srand(time(NULL));
-
-  int a;
-  int b;
-  int resultat;
-
-  while (1){
-      alarm(5);
-      a = hasard();
-      b = hasard();
-      printf("%d * %d\n", a, b);
-      scanf("%d", &resultat);
-  }
-  return 0;
+*void times_up(int sig){
+  puts("\n Temps écoulé!");
+  raise (SIGINT);
 }
+
+
+
+int catch_signal(int sig, void(*handler)(int)){
+  struct sigaction action;
+
+  action.sa_handler = handler;
+  sigemptyset(&action.sa_mask);
+  action.sa_flags = 0;
+
+  return sigaction (sig, &action, NULL);
+}
+ int main(){
+   catch_signal(SIGALRM, times_up);
+   catch_signal(SIGINT, end_game);
+   srandom(ime(0));
+
+   while(1){
+     int a = random() % 11;
+     int b = random() % 11;
+     int answer;
+     char txt(4);
+     alarm(5);
+     printf("\nCombien font %d fois %d : ", a, b);
+     fgets(txt, 4, stdin);
+     answer = atoi(txt);
+
+     if (answer == a*b)
+      score++;
+      else
+        printf("\nFaux! Score : %d\n", score);
+   }
+   return 0;
+ }
