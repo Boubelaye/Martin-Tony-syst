@@ -1,6 +1,6 @@
 
 CC      = gcc
-OBJS    = villes.o liste_ville.o
+OBJS    =
 CFLAGS  = -c -g -Wall -pedantic
 LDFLAGS =
 PGM     = programme
