@@ -1,6 +1,6 @@
 
 CC      = gcc
-OBJS    =
+OBJS    = villescp.o main.o
 CFLAGS  = -c -g -Wall -pedantic
 LDFLAGS =
 PGM     = programme
