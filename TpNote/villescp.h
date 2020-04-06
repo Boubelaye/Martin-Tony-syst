@@ -8,7 +8,12 @@ typedef struct Vcp{
   int codepos;
   struct Vcp *suc
 } Villecp;
+typedef struct Vcp *Liste
 
 Liste recuperation_fichiertxt();
+
+Liste liste_insererEnTete();
+
+Liste liste_insererEnQueue();
 
 #endif

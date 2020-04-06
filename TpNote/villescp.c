@@ -8,12 +8,21 @@ Liste recuperation_fichiertxt(){
   Liste l=NULL;
   FILE *origine;
 
-  fopen(origine);
-  return 1;
+  FILE *origine=fopen("villesEtCp.txt");
+
 
   fscanf(origine);
   return 1;
 
   fclose(origine);
   return 1;
+}
+
+
+Liste liste_insererEnTete(){
+
+}
+
+Liste liste_insererEnQueue(){
+
 }
